@@ -1,0 +1,41 @@
+name: main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout código fonte
+      uses: actions/checkout@v2
+
+    - name: Construir imagem Docker
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: Somativa2:latest
+
+  teste:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Teste de segurança utilizando OWASP ZAP
+      uses: owasp/zap-full-scan@v1
+      with:
+        target: http://localhost:8080
+        reportFilename: zap-report.html
+        reportTitle: OWASP ZAP Report
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: teste
+    steps:
+    - name: Implantação utilizando Ngrok
+      uses: w9jds/ngrok-action@v1
+      with:
+        authtoken: ${{ secrets.NGROK_AUTH_TOKEN }}
+        region: us
+        port: 8080
