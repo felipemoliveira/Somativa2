@@ -31,28 +31,19 @@ jobs:
       - uses: actions/checkout@v3
       - run: pip3 install Flask
       - run: flask
-      #- run: python3 app.py
       - uses: AppThreat/sast-scan-action@master
         with:
           type: "python"
-    
-    #- name: sast-scan
-     # uses: AppThreat/sast-scan-action@1.0.2
-  
-    #- name: Teste de segurança utilizando OWASP ZAP
-     # uses: owasp/zap-full-scan@v1
-      #with:
-       # target: http://localhost:8080
-        #reportFilename: zap-report.html
-        #reportTitle: OWASP ZAP Report
 
   deploy:
     runs-on: ubuntu-latest
     needs: teste
+    
     steps:
     - name: ngrok-tunnel
       uses: vmactions/ngrok-tunnel@v0.0.1
       with:
+        authtoken: ${{ secrets.NGROK_AUTH_TOKEN }}
         protocol: http   
         port: 5000
         
