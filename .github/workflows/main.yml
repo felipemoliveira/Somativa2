@@ -29,7 +29,6 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v3
-      - run: apt install python3-pip -y
       - run: pip3 install Flask
       - run: python3 -m flask app.py
       - uses: AppThreat/sast-scan-action@master
