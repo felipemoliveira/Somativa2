@@ -16,7 +16,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: Somativa2:latest
+        tags: lipeoliveira94/somativa2:latest
 
   teste:
     runs-on: ubuntu-latest
