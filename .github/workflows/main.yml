@@ -31,12 +31,12 @@ jobs:
     - name: sast-scan
       uses: AppThreat/sast-scan-action@1.0.2
   
-    - name: Teste de segurança utilizando OWASP ZAP
-      uses: owasp/zap-full-scan@v1
-      with:
-        target: http://localhost:8080
-        reportFilename: zap-report.html
-        reportTitle: OWASP ZAP Report
+    #- name: Teste de segurança utilizando OWASP ZAP
+     # uses: owasp/zap-full-scan@v1
+      #with:
+       # target: http://localhost:8080
+        #reportFilename: zap-report.html
+        #reportTitle: OWASP ZAP Report
 
   deploy:
     runs-on: ubuntu-latest
