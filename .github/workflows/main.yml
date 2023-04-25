@@ -30,7 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: pip3 install Flask
-      - run: python3 -m flask app.py
+      - run: flask
+      - run: python3 app.py
       - uses: AppThreat/sast-scan-action@master
         with:
           type: "python"
